@@ -1,0 +1,302 @@
+[
+  {
+    "name": "Aetheris Power ",
+    "env": 50,
+    "soc": 27,
+    "gov": 42
+  },
+  {
+    "name": "Veridian Fusion ",
+    "env": 30,
+    "soc": 51,
+    "gov": 41
+  },
+  {
+    "name": "Solara Core Systems ",
+    "env": 87,
+    "soc": 75,
+    "gov": 6
+  },
+  {
+    "name": "Helios Gridworks ",
+    "env": 52,
+    "soc": 11,
+    "gov": 44
+  },
+  {
+    "name": "Neptune Tidal ",
+    "env": 88,
+    "soc": 89,
+    "gov": 57
+  },
+  {
+    "name": "Isotope Dynamics ",
+    "env": 61,
+    "soc": 96,
+    "gov": 60
+  },
+  {
+    "name": "Kinetic Flow ",
+    "env": 89,
+    "soc": 7,
+    "gov": 92
+  },
+  {
+    "name": "BioSpark Synthetic ",
+    "env": 89,
+    "soc": 16,
+    "gov": 35
+  },
+  {
+    "name": "Geosync Thermal ",
+    "env": 85,
+    "soc": 16,
+    "gov": 93
+  },
+  {
+    "name": "Astraea Battery Lab ",
+    "env": 67,
+    "soc": 35,
+    "gov": 76
+  },
+  {
+    "name": "VoltStream Industries ",
+    "env": 77,
+    "soc": 52,
+    "gov": 2
+  },
+  {
+    "name": "Zenith Hydrogen ",
+    "env": 86,
+    "soc": 48,
+    "gov": 19
+  },
+  {
+    "name": "Nova Carbon Capture ",
+    "env": 93,
+    "soc": 35,
+    "gov": 60
+  },
+  {
+    "name": "TerraVolt Labs ",
+    "env": 99,
+    "soc": 87,
+    "gov": 38
+  },
+  {
+    "name": "Ignis Energy Group ",
+    "env": 42,
+    "soc": 41,
+    "gov": 26
+  },
+  {
+    "name": "Lumina Photon ",
+    "env": 66,
+    "soc": 1,
+    "gov": 89
+  },
+  {
+    "name": "Ironclad Holdings ",
+    "env": 92,
+    "soc": 56,
+    "gov": 96
+  },
+  {
+    "name": "Nexus Ledger ",
+    "env": 49,
+    "soc": 11,
+    "gov": 78
+  },
+  {
+    "name": "Apex Wealth Partners ",
+    "env": 84,
+    "soc": 96,
+    "gov": 94
+  },
+  {
+    "name": "Veritas Capital ",
+    "env": 76,
+    "soc": 62,
+    "gov": 96
+  },
+  {
+    "name": "Silverline Credit ",
+    "env": 17,
+    "soc": 4,
+    "gov": 13
+  },
+  {
+    "name": "QuantEdge Algorithms ",
+    "env": 86,
+    "soc": 56,
+    "gov": 61
+  },
+  {
+    "name": "Monolith Bancorp ",
+    "env": 4,
+    "soc": 48,
+    "gov": 96
+  },
+  {
+    "name": "Covenant Trust ",
+    "env": 31,
+    "soc": 12,
+    "gov": 49
+  },
+  {
+    "name": "Foresight Ventures ",
+    "env": 35,
+    "soc": 21,
+    "gov": 90
+  },
+  {
+    "name": "Equinox Arbitrage ",
+    "env": 61,
+    "soc": 87,
+    "gov": 57
+  },
+  {
+    "name": "BridgePort Finance ",
+    "env": 15,
+    "soc": 44,
+    "gov": 79
+  },
+  {
+    "name": "Vanguardia Wealth ",
+    "env": 77,
+    "soc": 94,
+    "gov": 90
+  },
+  {
+    "name": "BlueChip Crypto ",
+    "env": 54,
+    "soc": 43,
+    "gov": 51
+  },
+  {
+    "name": "Sterling & Co. ",
+    "env": 14,
+    "soc": 86,
+    "gov": 79
+  },
+  {
+    "name": "Optima InsurTech ",
+    "env": 76,
+    "soc": 2,
+    "gov": 84
+  },
+  {
+    "name": "Aegis Asset Management ",
+    "env": 89,
+    "soc": 89,
+    "gov": 5
+  },
+  {
+    "name": "Meridian Liquidity ",
+    "env": 15,
+    "soc": 59,
+    "gov": 54
+  },
+  {
+    "name": "Sentinel Defense Systems ",
+    "env": 78,
+    "soc": 90,
+    "gov": 66
+  },
+  {
+    "name": "Cerberus Cybernetics ",
+    "env": 93,
+    "soc": 24,
+    "gov": 53
+  },
+  {
+    "name": "Titan Aerospace ",
+    "env": 48,
+    "soc": 52,
+    "gov": 5
+  },
+  {
+    "name": "Aegis Tactical ",
+    "env": 4,
+    "soc": 33,
+    "gov": 50
+  },
+  {
+    "name": "Blackwood Security ",
+    "env": 49,
+    "soc": 10,
+    "gov": 9
+  },
+  {
+    "name": "Valiant Robotics ",
+    "env": 39,
+    "soc": 64,
+    "gov": 52
+  },
+  {
+    "name": "Icarus Avionics ",
+    "env": 56,
+    "soc": 44,
+    "gov": 37
+  },
+  {
+    "name": "Frontier Ballistics ",
+    "env": 35,
+    "soc": 19,
+    "gov": 6
+  },
+  {
+    "name": "GhostNet Intelligence ",
+    "env": 85,
+    "soc": 74,
+    "gov": 95
+  },
+  {
+    "name": "Vanguard Naval ",
+    "env": 90,
+    "soc": 90,
+    "gov": 19
+  },
+  {
+    "name": "Iron Dome Solutions ",
+    "env": 9,
+    "soc": 33,
+    "gov": 9
+  },
+  {
+    "name": "Stratos Shield ",
+    "env": 42,
+    "soc": 25,
+    "gov": 100
+  },
+  {
+    "name": "Obsidian Materials ",
+    "env": 95,
+    "soc": 73,
+    "gov": 17
+  },
+  {
+    "name": "Kestrel UAV ",
+    "env": 0,
+    "soc": 43,
+    "gov": 51
+  },
+  {
+    "name": "Phalanx Biometrics ",
+    "env": 16,
+    "soc": 92,
+    "gov": 61
+  },
+  {
+    "name": "Warden Global ",
+    "env": 25,
+    "soc": 97,
+    "gov": 91
+  },
+  {
+    "name": "Apex Munitions",
+    "env": 43,
+    "soc": 53,
+    "gov": 1
+  }
+]
