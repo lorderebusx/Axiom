@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { getAllCompanies, Company } from "@/data/companies";
 import CompanyCard from "@/components/CompanyCard";
-import { Search, Filter, RefreshCw } from "lucide-react";
+import { Search, Filter, RefreshCw, Network } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   // 1. Initialize Data
@@ -74,6 +75,12 @@ export default function Home() {
                 <RefreshCw size={12} className="mr-1" /> RESET_FILTERS
               </button>
             )}
+
+            {/* Nexus Button */}
+            <Link href="/nexus" className="flex items-center text-xs font-bold text-axiom-brand border border-void-700 bg-void-800 px-3 py-1 hover:border-axiom-acid hover:text-axiom-acid transition-all">
+              <Network size={14} className="mr-2" />
+              OPEN_NEXUS
+            </Link>
           </div>
 
           {/* COMMAND BAR */}
