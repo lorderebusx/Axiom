@@ -1,35 +1,36 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { getAllCompanies, Company } from "@/data/companies";
 import CompanyCard from "@/components/CompanyCard";
-import { Search, Filter, RefreshCw, Network } from "lucide-react";
-import Link from "next/link";
+import { Search, Filter, RefreshCw, Network, Swords } from "lucide-react";
+import clsx from "clsx";
 
 export default function Home() {
-  // 1. Initialize Data
+  // --- STATE MANAGEMENT ---
   const [allCompanies, setAllCompanies] = useState<Company[]>([]);
   const [filteredCompanies, setFilteredCompanies] = useState<Company[]>([]);
 
-  // 2. Filter States
+  // Filter States
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState("All");
 
-  // 3. Load Data on Mount (Client-Side)
+  // Compare Mode States
+  const [compareMode, setCompareMode] = useState(false);
+  const [selectedForCompare, setSelectedForCompare] = useState<string[]>([]);
+
+  // --- INITIAL DATA LOAD ---
   useEffect(() => {
     const data = getAllCompanies();
     setAllCompanies(data);
     setFilteredCompanies(data);
   }, []);
 
-  // 4. Extract Unique Industries for Dropdown
-  const industries = ["All", ...Array.from(new Set(allCompanies.map(c => c.industry))).sort()];
-
-  // 5. The Filter Engine
+  // --- FILTER ENGINE ---
   useEffect(() => {
     let result = allCompanies;
 
-    // Filter by Search
     if (searchTerm) {
       result = result.filter(c =>
         c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -37,7 +38,6 @@ export default function Home() {
       );
     }
 
-    // Filter by Industry
     if (selectedIndustry !== "All") {
       result = result.filter(c => c.industry === selectedIndustry);
     }
@@ -45,45 +45,106 @@ export default function Home() {
     setFilteredCompanies(result);
   }, [searchTerm, selectedIndustry, allCompanies]);
 
+  // Extract Unique Industries for Dropdown
+  const industries = ["All", ...Array.from(new Set(allCompanies.map(c => c.industry))).sort()];
+
+  // --- HANDLERS ---
+  const handleCardClick = (e: React.MouseEvent, id: string) => {
+    if (!compareMode) return; // Allow normal navigation if not comparing
+
+    e.preventDefault(); // Block Link navigation
+
+    if (selectedForCompare.includes(id)) {
+      // Deselect
+      setSelectedForCompare(prev => prev.filter(item => item !== id));
+    } else {
+      // Select (Limit to 2)
+      if (selectedForCompare.length < 2) {
+        setSelectedForCompare(prev => [...prev, id]);
+      }
+    }
+  };
+
+  const resetFilters = () => {
+    setSearchTerm("");
+    setSelectedIndustry("All");
+  };
+
+  const toggleCompareMode = () => {
+    setCompareMode(!compareMode);
+    setSelectedForCompare([]); // Clear selection when toggling
+  };
+
   return (
     <main className="min-h-screen bg-void-900 text-axiom-brand">
 
-      {/* HEADER & COMMAND BAR (Sticky) */}
-      <div className="sticky top-0 z-50 bg-void-900/95 backdrop-blur border-b border-void-700 shadow-2xl">
+      {/* --- STICKY HEADER & COMMAND BAR --- */}
+      <div className="sticky top-0 z-50 bg-void-900/95 backdrop-blur border-b border-void-700 shadow-2xl transition-all">
         <div className="p-6 max-w-7xl mx-auto">
 
-          {/* Title Area */}
-          <div className="flex justify-between items-end mb-6">
+          {/* Top Row: Title & Actions */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
             <div>
-              <h1 className="text-4xl font-bold tracking-tighter text-axiom-brand">
+              <h1 className="text-3xl font-bold tracking-tighter text-axiom-brand">
                 AXIOM_<span className="text-axiom-acid">v1</span>
               </h1>
-              <p className="font-mono text-axiom-muted text-sm mt-1">
+              <p className="font-mono text-axiom-muted text-xs mt-1">
                 Algorithmic ESG verification system. Detecting corporate greenwashing through statistical anomaly analysis.
               </p>
-              <p className="font-mono text-axiom-muted text-sm mt-1">
+              <p className="font-mono text-axiom-muted text-xs mt-1">
                 TRACKING {allCompanies.length} ENTITIES
               </p>
             </div>
 
-            {/* Reset Button */}
-            {(searchTerm || selectedIndustry !== "All") && (
-              <button
-                onClick={() => { setSearchTerm(""); setSelectedIndustry("All"); }}
-                className="flex items-center text-xs text-axiom-crit hover:underline"
-              >
-                <RefreshCw size={12} className="mr-1" /> RESET_FILTERS
-              </button>
-            )}
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-3 items-center">
 
-            {/* Nexus Button */}
-            <Link href="/nexus" className="flex items-center text-xs font-bold text-axiom-brand border border-void-700 bg-void-800 px-3 py-1 hover:border-axiom-acid hover:text-axiom-acid transition-all">
-              <Network size={14} className="mr-2" />
-              OPEN_NEXUS
-            </Link>
+              {/* Reset Filters (Only visible if active) */}
+              {(searchTerm || selectedIndustry !== "All") && (
+                <button
+                  onClick={resetFilters}
+                  className="flex items-center text-xs text-axiom-crit hover:underline mr-2"
+                >
+                  <RefreshCw size={12} className="mr-1" /> RESET
+                </button>
+              )}
+
+              {/* Nexus Graph Button */}
+              <Link
+                href="/nexus"
+                className="flex items-center text-xs font-bold text-axiom-brand border border-void-700 bg-void-800 px-3 py-1.5 hover:border-axiom-acid hover:text-axiom-acid transition-all"
+              >
+                <Network size={14} className="mr-2" />
+                OPEN_NEXUS
+              </Link>
+
+              {/* Compare Toggle */}
+              <button
+                onClick={toggleCompareMode}
+                className={clsx(
+                  "flex items-center text-xs font-bold border px-3 py-1.5 transition-all",
+                  compareMode
+                    ? "bg-axiom-acid text-void-900 border-axiom-acid"
+                    : "bg-void-800 text-axiom-brand border-void-700 hover:border-axiom-acid"
+                )}
+              >
+                <Swords size={14} className="mr-2" />
+                {compareMode ? "CANCEL_COMPARE" : "COMPARE_ENTITIES"}
+              </button>
+
+              {/* Launch Standoff Button (Conditional) */}
+              {compareMode && selectedForCompare.length === 2 && (
+                <Link
+                  href={`/standoff?a=${selectedForCompare[0]}&b=${selectedForCompare[1]}`}
+                  className="bg-axiom-crit text-white px-4 py-1.5 text-xs font-bold flex items-center animate-pulse hover:bg-red-600 transition-colors"
+                >
+                  INITIATE STANDOFF &rarr;
+                </Link>
+              )}
+            </div>
           </div>
 
-          {/* COMMAND BAR */}
+          {/* Bottom Row: Inputs */}
           <div className="flex flex-col md:flex-row gap-4">
 
             {/* Search Input */}
@@ -110,7 +171,6 @@ export default function Home() {
                   <option key={ind} value={ind}>{ind.toUpperCase()}</option>
                 ))}
               </select>
-              {/* Custom Arrow Icon */}
               <div className="absolute right-3 top-3 pointer-events-none text-axiom-muted">
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor">
                   <path d="M0 0L5 6L10 0H0Z" />
@@ -120,14 +180,36 @@ export default function Home() {
 
           </div>
         </div>
+
+        {/* Compare Mode Message Banner */}
+        {compareMode && (
+          <div className="bg-axiom-acid/10 border-b border-axiom-acid/20 py-1 text-center">
+            <p className="text-xs text-axiom-acid font-mono font-bold animate-pulse">
+              SELECT TWO ENTITIES TO COMPARE [{selectedForCompare.length}/2]
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* THE MASONRY GRID (No Gaps) */}
+      {/* --- MASONRY GRID --- */}
       <div className="p-6 max-w-7xl mx-auto">
-        {/* 'columns-1 md:columns-2 lg:columns-3' creates the Masonry layout */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
           {filteredCompanies.map((company) => (
-            <CompanyCard key={company.id} company={company} />
+            <div
+              key={company.id}
+              onClick={(e) => handleCardClick(e, company.id)}
+              className={clsx(
+                "transition-all duration-200",
+                compareMode ? "cursor-pointer" : "",
+                // Selection Visuals
+                selectedForCompare.includes(company.id) ? "ring-2 ring-axiom-acid scale-[1.02] z-10 shadow-lg shadow-axiom-acid/10" : "",
+                // Dim non-selected items if selection is full
+                compareMode && selectedForCompare.length === 2 && !selectedForCompare.includes(company.id) ? "opacity-40 grayscale blur-[1px]" : ""
+              )}
+            >
+              {/* Pass disableLink so we can hijack the click event */}
+              <CompanyCard company={company} disableLink={compareMode} />
+            </div>
           ))}
         </div>
 
